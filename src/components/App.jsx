@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import "../css/App.css";
 import Input from "./Input";
+import Response from "./Response";
 import axios from "axios";
-require("dotenv").config();
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       photo: "",
-      sendData: ""
+      sendData: "",
+      responseFromAPI: "Your emotion is here"
     };
   }
 
@@ -54,20 +55,16 @@ class App extends Component {
   };
 
   submitData = () => {
-    const axios = require("axios");
-    const subscriptionKey = ""; //キーを指定
+    const subscriptionKey = process.env.REACT_APP_AZURE_API_KEY; //キーを指定
     const uriBase =
       "https://face-recognition2.cognitiveservices.azure.com/face/v1.0/detect";
-    console.log("Is send data?", this.state.sendData);
-    const sourceImageUrl = this.state.sendData;
 
     // Request parameters.
     const params = {
       returnFaceId: "true",
       returnFaceLandmarks: "false",
       returnFaceAttributes:
-        "age,gender,headPose,smile,facialHair,glasses," +
-        "emotion,hair,makeup,occlusion,accessories,blur,exposure,noise"
+        "age,gender,headPose,smile,facialHair,glasses," + "emotion"
     };
 
     const config = {
@@ -86,8 +83,8 @@ class App extends Component {
       .request(config)
       .then(res => {
         const jsonResponse = JSON.stringify(res.data, null, "  ");
-        console.log("JSON Response\n");
         console.log("succeess!!!!!!!!", jsonResponse);
+        this.setState({ responseFromAPI: jsonResponse });
       })
 
       .catch(error => console.log(error.response.data));
@@ -101,6 +98,7 @@ class App extends Component {
         <button type="button" onClick={this.submitData}>
           submit
         </button>
+        <Response text={this.state.responseFromAPI} />
       </div>
     );
   }
