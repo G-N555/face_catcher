@@ -65,7 +65,7 @@ class App extends Component {
   };
 
   submitData = () => {
-    const subscriptionKey = process.env.REACT_APP_AZURE_API_KEY; //キーを指定
+    const subscriptionKey = process.env.REACT_APP_AZURE_API_KEY; //my API key
     const uriBase =
       "https://face-recognition2.cognitiveservices.azure.com/face/v1.0/detect";
 
@@ -109,19 +109,38 @@ class App extends Component {
     return (
       <div className="App">
         <h1 className="title">Show your emotion!</h1>
-        {/* <Input click={this.readUploadedFileAsText} /> */}
-        <div className="response-container">
-          <Response responseData={this.state.responseFromAPI} />
-        </div>
-        <div className="camera-container">
-          {this.state.camera && (
-            <Webcam
-              getImageFromChild={this.getImage}
-              submitData={this.submitData}
+        {/* <Input click={this.readUploadedFileAsText} />  I left this part for any case to use*/}
+        <div className="components-container">
+          <div className="response-container">
+            <Response
+              ref="response"
+              responseData={this.state.responseFromAPI}
             />
-          )}
+          </div>
+          <div className="camera-container">
+            {this.state.camera && (
+              <Webcam
+                getImageFromChild={this.getImage}
+                submitData={this.submitData}
+              />
+            )}
+          </div>
         </div>
-        <button type="button" onClick={this.cameraOnOff}>
+        <button
+          type="button"
+          className="submit-button"
+          onClick={e => {
+            this.submitData();
+            this.refs.response.updateData();
+          }}
+        >
+          submit
+        </button>
+        <button
+          type="button"
+          className="camera-off-button"
+          onClick={this.cameraOnOff}
+        >
           Camera Off
         </button>
       </div>

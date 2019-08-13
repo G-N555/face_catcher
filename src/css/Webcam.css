@@ -1,21 +1,9 @@
-.video-container {
-  display: flex;
+.capture {
   width: 100%;
   height: 100%;
 }
+
 .video {
-  width: 70%;
+  width: 100%;
   height: 100%;
-}
-
-.button-container {
-  display: flex;
-}
-
-.capture {
-  width: 50%;
-}
-
-.submit {
-  width: 50%;
 }

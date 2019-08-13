@@ -24,18 +24,9 @@ export default class WebcamCapture extends React.Component {
           ref={this.setRef}
           screenshotFormat="image/jpeg"
         />
-        <div className="button-container">
-          <button className="capture" onClick={this.capture}>
-            Capture photo
-          </button>
-          <button
-            type="button"
-            className="submit"
-            onClick={this.props.submitData}
-          >
-            submit
-          </button>
-        </div>
+        <button className="capture" onClick={this.capture}>
+          Capture photo
+        </button>
       </div>
     );
   }
