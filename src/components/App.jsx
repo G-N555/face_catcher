@@ -11,7 +11,7 @@ class App extends Component {
     this.state = {
       photo: "",
       sendData: "",
-      responseFromAPI: "Your emotion is here",
+      responseFromAPI: {},
       camera: true,
       webCamData: ""
     };
@@ -90,9 +90,8 @@ class App extends Component {
     axios
       .request(config)
       .then(res => {
-        const jsonResponse = JSON.stringify(res.data, null, "  ");
-        console.log("succeess!!!!!!!!", jsonResponse);
-        this.setState({ responseFromAPI: jsonResponse });
+        const emotion = res.data[0].faceAttributes.emotion;
+        this.setState({ responseFromAPI: emotion });
       })
 
       .catch(error => console.log(error.response.data));
@@ -110,16 +109,15 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Actually, it works</h1>
-        <Input click={this.readUploadedFileAsText} />
+        {/* <Input click={this.readUploadedFileAsText} /> */}
+        <Response responseData={this.state.responseFromAPI} />
+        {this.state.camera && <Webcam getImageFromChild={this.getImage} />}
         <button type="button" onClick={this.submitData}>
           submit
         </button>
         <button type="button" onClick={this.cameraOnOff}>
           Camera Off
         </button>
-        {this.state.camera && <Webcam getImageFromChild={this.getImage} />}
-        <Response text={this.state.responseFromAPI} />
-        <canvas />
       </div>
     );
   }
