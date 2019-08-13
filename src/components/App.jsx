@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../css/App.css";
 import Input from "./Input";
 import Response from "./Response";
+import Webcam from "./Webcam";
 import axios from "axios";
 
 class App extends Component {
@@ -10,7 +11,9 @@ class App extends Component {
     this.state = {
       photo: "",
       sendData: "",
-      responseFromAPI: "Your emotion is here"
+      responseFromAPI: "Your emotion is here",
+      camera: true,
+      webCamData: ""
     };
   }
 
@@ -33,8 +36,15 @@ class App extends Component {
     for (let i = 0; i < rawLength; ++i) {
       uInt8Array[i] = raw.charCodeAt(i);
     }
-
-    this.setState({ sendData: new Blob([uInt8Array], { type: contentType }) });
+    if (this.state.camera) {
+      this.setState({
+        webCamData: new Blob([uInt8Array], { type: contentType })
+      });
+    } else {
+      this.setState({
+        sendData: new Blob([uInt8Array], { type: contentType })
+      });
+    }
   };
 
   //create photoData (It's async!)
@@ -62,9 +72,7 @@ class App extends Component {
     // Request parameters.
     const params = {
       returnFaceId: "true",
-      returnFaceLandmarks: "false",
-      returnFaceAttributes:
-        "age,gender,headPose,smile,facialHair,glasses," + "emotion"
+      returnFaceAttributes: "emotion"
     };
 
     const config = {
@@ -75,7 +83,7 @@ class App extends Component {
         "Ocp-Apim-Subscription-Key": subscriptionKey
       },
       processData: false,
-      data: this.state.sendData,
+      data: this.state.webCamData,
       params: params
     };
 
@@ -90,6 +98,14 @@ class App extends Component {
       .catch(error => console.log(error.response.data));
   };
 
+  cameraOnOff = () => {
+    this.setState({ camera: !this.state.camera });
+  };
+
+  getImage = webCamData => {
+    this.makeblob(webCamData);
+  };
+
   render() {
     return (
       <div className="App">
@@ -98,7 +114,12 @@ class App extends Component {
         <button type="button" onClick={this.submitData}>
           submit
         </button>
+        <button type="button" onClick={this.cameraOnOff}>
+          Camera Off
+        </button>
+        {this.state.camera && <Webcam getImageFromChild={this.getImage} />}
         <Response text={this.state.responseFromAPI} />
+        <canvas />
       </div>
     );
   }
