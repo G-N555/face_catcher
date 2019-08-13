@@ -6,14 +6,10 @@ class Response extends Component {
     super(props);
   }
 
-  check = () => {
-    console.log(this.props.responseData);
-  };
-
   render() {
     return (
-      <div className="response-container">
-        <ul className="emotion-container">
+      <div className="list-container">
+        <ul>
           <li>ANGER: {this.props.responseData.anger}</li>
           <li>CONTEMPT: {this.props.responseData.contempt}</li>
           <li>DISGUST: {this.props.responseData.disgust}</li>

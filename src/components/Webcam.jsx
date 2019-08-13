@@ -1,5 +1,6 @@
 import React from "react";
 import Webcam from "react-webcam";
+import "../css/Webcam.css";
 
 export default class WebcamCapture extends React.Component {
   setRef = webcam => {
@@ -15,23 +16,26 @@ export default class WebcamCapture extends React.Component {
   };
 
   render() {
-    const videoConstraints = {
-      width: 1280,
-      height: 720,
-      facingMode: "user"
-    };
-
     return (
-      <div>
+      <div className="video-container">
         <Webcam
+          className="video"
           audio={false}
-          height={350}
           ref={this.setRef}
           screenshotFormat="image/jpeg"
-          width={350}
-          videoConstraints={videoConstraints}
         />
-        <button onClick={this.capture}>Capture photo</button>
+        <div className="button-container">
+          <button className="capture" onClick={this.capture}>
+            Capture photo
+          </button>
+          <button
+            type="button"
+            className="submit"
+            onClick={this.props.submitData}
+          >
+            submit
+          </button>
+        </div>
       </div>
     );
   }

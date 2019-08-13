@@ -108,13 +108,19 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Actually, it works</h1>
+        <h1 className="title">Show your emotion!</h1>
         {/* <Input click={this.readUploadedFileAsText} /> */}
-        <Response responseData={this.state.responseFromAPI} />
-        {this.state.camera && <Webcam getImageFromChild={this.getImage} />}
-        <button type="button" onClick={this.submitData}>
-          submit
-        </button>
+        <div className="response-container">
+          <Response responseData={this.state.responseFromAPI} />
+        </div>
+        <div className="camera-container">
+          {this.state.camera && (
+            <Webcam
+              getImageFromChild={this.getImage}
+              submitData={this.submitData}
+            />
+          )}
+        </div>
         <button type="button" onClick={this.cameraOnOff}>
           Camera Off
         </button>
