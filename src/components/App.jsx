@@ -111,7 +111,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1 className="title">Show your emotion!</h1>
+        <div className="title-container">
+          <h1 className="title">Show your emotion!</h1>
+        </div>
         {/* <Input click={this.readUploadedFileAsText} />  I left this part for any case to use*/}
         <div className="response-container">
           <Response ref="response" responseData={this.state.responseFromAPI} />

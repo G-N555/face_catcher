@@ -22,23 +22,23 @@ class Response extends Component {
             data: [],
             backgroundColor: [
               "#FF6384",
-              "#36A2EB",
-              "#FFCE56",
-              "blue",
+              "purple",
+              "red",
+              "gray",
               "yellow",
               "pink",
-              "gray",
-              "skyblue"
+              "blue",
+              "lightgreen"
             ],
             hoverBackgroundColor: [
               "#FF6384",
-              "#36A2EB",
-              "#FFCE56",
-              "blue",
+              "purple",
+              "red",
+              "gray",
               "yellow",
               "pink",
-              "gray",
-              "skyblue"
+              "blue",
+              "lightgreen"
             ]
           }
         ]
@@ -66,7 +66,7 @@ class Response extends Component {
           data={this.state.data}
           options={{
             responsive: true,
-            maintainAspectRatio: true
+            maintainAspectRatio: false
           }}
         />
       </div>

@@ -9,7 +9,7 @@ class Preview extends Component {
 
   render() {
     return (
-      <div>
+      <div className="captureimage-container">
         <img className="image" src={this.props.captureData} alt="image" />
       </div>
     );
