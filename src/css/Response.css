@@ -4,7 +4,6 @@
 }
 
 canvas {
-  width: 600px;
-  height: 400px;
+  display: inline;
   margin: 0px;
 }

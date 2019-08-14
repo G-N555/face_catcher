@@ -125,7 +125,7 @@ class App extends Component {
           )}
         </div>
         <div className="preview-container">
-          <Preview captureData={this.state.preview} />
+          {this.state.camera && <Preview captureData={this.state.preview} />}
         </div>
         <div className="button-container">
           <button

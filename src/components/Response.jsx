@@ -62,7 +62,13 @@ class Response extends Component {
   render() {
     return (
       <div className="list-container">
-        <Doughnut data={this.state.data} />
+        <Doughnut
+          data={this.state.data}
+          options={{
+            responsive: true,
+            maintainAspectRatio: true
+          }}
+        />
       </div>
     );
   }
