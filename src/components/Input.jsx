@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "../css/Input.css";
-require("dotenv").config();
 
 //I leave this component for any case need to use
 class Input extends Component {

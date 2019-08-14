@@ -3,6 +3,7 @@ import "../css/App.css";
 import Input from "./Input";
 import Response from "./Response";
 import Webcam from "./Webcam";
+import Preview from "./Preview";
 import axios from "axios";
 
 class App extends Component {
@@ -13,7 +14,8 @@ class App extends Component {
       sendData: "",
       responseFromAPI: {},
       camera: true,
-      webCamData: ""
+      webCamData: "",
+      preview: ""
     };
   }
 
@@ -47,7 +49,7 @@ class App extends Component {
     }
   };
 
-  //create photoData (It's async!)
+  //create photoData based on input file(It's async!)
   readUploadedFileAsText = e => {
     const fr = new FileReader();
     return new Promise((resolve, reject) => {
@@ -103,6 +105,7 @@ class App extends Component {
 
   getImage = webCamData => {
     this.makeblob(webCamData);
+    this.setState({ preview: webCamData });
   };
 
   render() {
@@ -110,39 +113,39 @@ class App extends Component {
       <div className="App">
         <h1 className="title">Show your emotion!</h1>
         {/* <Input click={this.readUploadedFileAsText} />  I left this part for any case to use*/}
-        <div className="components-container">
-          <div className="response-container">
-            <Response
-              ref="response"
-              responseData={this.state.responseFromAPI}
-            />
-          </div>
-          <div className="camera-container">
-            {this.state.camera && (
-              <Webcam
-                getImageFromChild={this.getImage}
-                submitData={this.submitData}
-              />
-            )}
-          </div>
+        <div className="response-container">
+          <Response ref="response" responseData={this.state.responseFromAPI} />
         </div>
-        <button
-          type="button"
-          className="submit-button"
-          onClick={e => {
-            this.submitData();
-            this.refs.response.updateData();
-          }}
-        >
-          submit
-        </button>
-        <button
-          type="button"
-          className="camera-off-button"
-          onClick={this.cameraOnOff}
-        >
-          Camera Off
-        </button>
+        <div className="camera-container">
+          {this.state.camera && (
+            <Webcam
+              getImageFromChild={this.getImage}
+              submitData={this.submitData}
+            />
+          )}
+        </div>
+        <div className="preview-container">
+          <Preview captureData={this.state.preview} />
+        </div>
+        <div className="button-container">
+          <button
+            type="button"
+            className="submit-button"
+            onClick={e => {
+              this.submitData();
+              this.refs.response.updateData();
+            }}
+          >
+            submit
+          </button>
+          <button
+            type="button"
+            className="camera-off-button"
+            onClick={this.cameraOnOff}
+          >
+            Camera Off
+          </button>
+        </div>
       </div>
     );
   }

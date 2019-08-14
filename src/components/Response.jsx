@@ -19,7 +19,7 @@ class Response extends Component {
         ],
         datasets: [
           {
-            data: [20, 30, 40, 3, 2, 1, 2, 2],
+            data: [],
             backgroundColor: [
               "#FF6384",
               "#36A2EB",
@@ -62,7 +62,6 @@ class Response extends Component {
   render() {
     return (
       <div className="list-container">
-        <h2 onClick={this.updateData}>Doughnut Example</h2>
         <Doughnut data={this.state.data} />
       </div>
     );

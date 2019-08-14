@@ -1,29 +1,38 @@
 .App {
+  display: flex;
+  text-align: center;
   background-color: #282c34;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.conponents-container {
-  text-align: center;
 }
 
 .title {
   font-family: "Trebuchet MS";
 }
 
+.conponents-container {
+  flex-direction: column;
+  text-align: center;
+}
+
 .response-container {
-  width: 40%;
+  width: 50%;
 }
 
 .camera-container {
-  width: 40%;
+  width: 50%;
+}
+
+.preview-container {
+  width: 80%;
 }
 
 .camera-off-button {
-  width: 10%;
 }
 
 .submit {
-  width: 10%;
+}
+
+.button-container {
+  width: 100%;
 }
