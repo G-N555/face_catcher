@@ -23,8 +23,6 @@
   flex-grow: 1;
 }
 .button-container {
-  position: absolute;
-  right: 0;
-  bottom: 250px;
+  bottom: 0px;
   flex-grow: 1;
 }
